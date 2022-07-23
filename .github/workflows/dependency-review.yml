@@ -9,10 +9,7 @@ on: [pull_request]
 
 permissions:
   contents: read
-env:
-  JWT_KEY = 'secret'
-AWS_SECRET_ACCESS_KEY = 'by5owQy7ELt8hszg8ctD19OsXwdmhbSexE2xsY2y'
-
+  
 jobs:
   dependency-review:
     runs-on: ubuntu-latest
