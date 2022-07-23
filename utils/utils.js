@@ -12,10 +12,12 @@ aws.config.update({
 
 const s3 = new aws.S3();
 
+let bucketName = 'property16777';
+
 const upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: process.env.AWS_BUCKET_NAME,
+    bucket: bucketName,
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
@@ -29,7 +31,7 @@ const upload = multer({
 async function deleteFile(link) {
   console.log(link);
   const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
+    Bucket: bucketName,
     Key: link,
   };
   await s3.deleteObject(params, function (err, data) {
