@@ -11,10 +11,7 @@ permissions:
   contents: read
 env:
   JWT_KEY = 'secret'
-AWS_SECRET_ACCESS_KEY = "by5owQy7ELt8hszg8ctD19OsXwdmhbSexE2xsY2y"
-AWS_ACCESS_KEY_ID = "AKIAXVPYT5Q7OLALOI5T"
-AWS_BUCKET_NAME = 'property16777'
-AWS_DEFAULT_REGION = 'ap-south-1'
+AWS_SECRET_ACCESS_KEY = 'by5owQy7ELt8hszg8ctD19OsXwdmhbSexE2xsY2y'
 
 jobs:
   dependency-review:
