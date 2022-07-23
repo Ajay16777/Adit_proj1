@@ -3,7 +3,7 @@ const mongooes = require("mongoose");
 const app = express();
 const dotenv = require("dotenv");
 const cors = require("cors");
-const ip = require("ip");
+// const ip = require("ip");
 
 
 dotenv.config();
@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 mongooes
-  .connect("mongodb://localhost/Adit", { useNewUrlParser: true })
+  .connect("mongodb+srv://adit:adit@cluster0.bfpxxr9.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true })
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -24,7 +24,7 @@ mongooes
   })
   .finally(() => {
     app.listen(port, () => {
-      console.log(`http://${ip.address()}:${port}`);
+      console.log(`http://localhost:${port}`);
     });
   });
 
