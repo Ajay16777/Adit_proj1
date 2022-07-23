@@ -30,6 +30,12 @@ mongooes
     });
   });
 
+  // get
+  app.get("/", (req, res) => {
+    res.send("Hello World");
+  }
+  );
+
 app.use("/api/users", require("./routes/User"));
 app.use("/api/properties", require("./routes/Property"));
 app.use("/api/admin", require("./routes/Admin"));
