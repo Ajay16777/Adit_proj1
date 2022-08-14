@@ -26,7 +26,7 @@ mongooes
   })
   .finally(() => {
     app.listen(port, () => {
-      console.log(`http://localhost:${port}`);
+      console.log(`Server started on port ${port}`);
     });
   });
 
@@ -42,7 +42,7 @@ mongooes
     res.send("Hello World");
   }
   );
-  
+
 
 app.use("/api/users", require("./routes/User"));
 app.use("/api/properties", require("./routes/Property"));
