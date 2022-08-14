@@ -8,16 +8,15 @@ const cors = require("cors");
 
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env.AWS_BUCKET_NAME);
-
-
+let url = "mongodb://localhost:27017/Adit";
+// "mongodb+srv://adit:adit@cluster0.bfpxxr9.mongodb.net/?retryWrites=true&w=majority"
 // Connect to MongoDB
 mongooes
-  .connect("mongodb+srv://adit:adit@cluster0.bfpxxr9.mongodb.net/?retryWrites=true&w=majority", { useNewUrlParser: true })
+  .connect(url, { useNewUrlParser: true })
   .then(() => {
     console.log("Connected to MongoDB");
   })
