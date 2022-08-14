@@ -12,7 +12,8 @@ const port = process.env.PORT || 8000;
 app.use(cors());
 app.use(express.json());
 
-let url = "mongodb://localhost:27017/Adit";
+let url = "mongodb+srv://adit:adit@cluster0.bfpxxr9.mongodb.net/?retryWrites=true&w=majority";
+// "mongodb://localhost:27017/Adit";
 // "mongodb+srv://adit:adit@cluster0.bfpxxr9.mongodb.net/?retryWrites=true&w=majority"
 // Connect to MongoDB
 mongooes
