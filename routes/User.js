@@ -11,6 +11,7 @@ const {
   getUser,
   updateUser,
   deleteUser,
+  verifyPhone
 } = require("../controllers/User");
 const validator = require("./validators/Uservalidator");
 
@@ -18,6 +19,8 @@ const validator = require("./validators/Uservalidator");
 // @desc    Create a user
 // @access  Public
 router.post("/register", upload.single("Image"), validator.register, register);
+//verify phone number
+router.post("/verify", verifyPhone);
 
 // @route   POST api/users/login
 // @desc    Login a user

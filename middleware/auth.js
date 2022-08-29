@@ -15,8 +15,15 @@ function verifyToken(req, res, next) {
         .send({ auth: false, message: "Failed to authenticate token." });
 
     // if everything good, save to request for use in other routes
-    req.userId = decoded._id;
-    next();
+    if (decoded.IsPhoneVerified == true) {
+      req.userId = decoded._id;
+      req.Role = decoded.Role;
+      next();
+    } else {
+      return res
+        .status(403)
+        .send({ auth: false, message: "Phone not verified" });
+    }
   });
 }
 
@@ -57,9 +64,11 @@ function verifyBuilder(req, res, next) {
 
     // if everything good, save to request for use in other routes
     if (decoded.Role == "Builder") {
-      req.userId = decoded._id;
-      req.Role = decoded.Role;
-      next();
+      if (decoded.IsPhoneVerified == true) {
+        req.userId = decoded._id;
+        req.Role = decoded.Role;
+        next();
+      }
     } else {
       return res.status(403).send({ auth: false, message: "Not a builder" });
     }

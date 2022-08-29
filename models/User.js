@@ -46,6 +46,15 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    IsPhoneVerified: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    otp: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -79,7 +88,7 @@ UserSchema.methods.generateAuthToken = function () {
     const user = this;
     //use the user id and IsAdmin to generate a token
     const token = jwt.sign(
-      { _id: user._id, Role: user.Role },
+      { _id: user._id, Role: user.Role, IsPhoneVerified: user.IsPhoneVerified },
       process.env.JWT_KEY
     );
     return token;

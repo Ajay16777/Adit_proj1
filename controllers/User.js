@@ -1,6 +1,7 @@
 const { User } = require("../models/User");
 const bcrypt = require("bcrypt");
-const { deleteFile } = require("../utils/utils");
+const { deleteFile, sendOtp } = require("../utils/utils");
+const otpGenerator = require("otp-generator");
 
 //rgister user in the database and return the user
 async function register(req, res) {
@@ -13,15 +14,45 @@ async function register(req, res) {
   }
 
   userData.phone = userData.phoneNumber;
+  //otp is number between 1000 and 9999
+  userData.otp = otpGenerator.generate(8, {
+    upperCase: false,
+    specialChars: false,
+  });
+  console.log(userData.otp);
 
   try {
     const user = await User.register(userData);
-
-    res.send(user);
+    if (user) {
+      //send otp to user
+      sendOtp(user.phone, user.otp, user.firstName);
+      res.send(user);
+    } else {
+      res.status(400).send({ message: "Invalid email or password" });
+    }
   } catch (error) {
     res.json(error);
   }
 }
+
+//verifyPhone
+async function verifyPhone(req, res) {
+  const { otp, id } = req.body;
+
+  const user = await User.findById(id);
+  if (user) {
+    if (user.otp === otp) {
+      user.IsPhoneVerified = true;
+      user.save();
+      res.send(user);
+    } else {
+      res.status(400).send({ message: "Invalid otp" });
+    }
+  } else {
+    res.status(400).send({ message: "User does not exist" });
+  }
+}
+
 // login user and return the user use async/await
 async function login(req, res) {
   const { email, password } = req.body;
@@ -114,4 +145,5 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  verifyPhone,
 };
