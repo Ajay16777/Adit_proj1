@@ -1,7 +1,6 @@
 const { User } = require("../models/User");
 const bcrypt = require("bcrypt");
-const { deleteFile, sendOtp } = require("../utils/utils");
-const otpGenerator = require("otp-generator");
+const { deleteFile, sendOtp, makeotp } = require("../utils/utils");
 
 //rgister user in the database and return the user
 async function register(req, res) {
@@ -15,11 +14,7 @@ async function register(req, res) {
 
   userData.phone = userData.phoneNumber;
   //otp is number between 1000 and 9999
-  userData.otp = otpGenerator.generate(8, {
-    upperCase: false,
-    specialChars: false,
-  });
-  console.log(userData.otp);
+  userData.otp = await makeotp();
 
   try {
     const user = await User.register(userData);

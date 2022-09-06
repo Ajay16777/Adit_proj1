@@ -29,6 +29,15 @@ const upload = multer({
   }),
 });
 
+async function makeotp() {
+  var otp = "";
+  for (var i = 0; i < 8; i++) {
+    otp += Math.floor(Math.random() * 10);
+  }
+  return otp;
+}
+
+
 //delete file from s3 by link
 async function deleteFile(link) {
   console.log(link);
@@ -74,7 +83,7 @@ async function sendOtp(phone, otp, name) {
   // // https://api.authkey.io/request?authkey=AUTHKEY&mobile=RecepientMobile&country_code=CountryCode&sid=1001&name=Twinkle&otp=1234
 }
 
-module.exports = { upload, deleteFile, sendOtp };
+module.exports = { upload, deleteFile, sendOtp, makeotp };
 
 //end s3 multer
 //end of file
